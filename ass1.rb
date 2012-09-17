@@ -21,7 +21,7 @@ def count_words( string )
             h[word] = 1
         end
     }
-    return h
+    return h.inspect
 end
 
 puts count_words("A man, a plan, a canal -- Panama")
