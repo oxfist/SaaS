@@ -1,5 +1,7 @@
 #! /usr/bin/env ruby
 
+#require 'debug'
+
 def palindrome?( string )
     word = string.downcase.gsub(/[^a-z]/, '')
     if word == word.reverse
@@ -9,8 +11,8 @@ def palindrome?( string )
     end
 end
 
-p palindrome?( "Madam, I'm Adam" )
-p palindrome?( "Abracadabra" )
+#p palindrome?( "Madam, I'm Adam" )
+#p palindrome?( "Abracadabra" )
 
 def count_words( string )
     h = Hash.new
@@ -24,8 +26,8 @@ def count_words( string )
     return h
 end
 
-p count_words("A man, a plan, a canal -- Panama")
-p count_words "Doo bee doo bee doo"
+#p count_words("A man, a plan, a canal -- Panama")
+#p count_words "Doo bee doo bee doo"
 
 class WrongNumberOfPlayersError < StandardError ; end
 class NoSuchStrategyError < StandardError ; end
@@ -62,7 +64,7 @@ def rps_game_winner(game)
 
 end
 
-p rps_game_winner( [ [ "Dave", "P" ], [ "Armando", "P" ] ] )
+#p rps_game_winner( [ [ "Dave", "P" ], [ "Armando", "P" ] ] )
 
 def rps_tournament_winner(tournament)
     if not tournament[0][0].kind_of? Array and not tournament[1][0].kind_of? Array
@@ -75,19 +77,44 @@ def rps_tournament_winner(tournament)
     return rps_tournament_winner( [rps_tournament_winner( tournament[0] ), rps_tournament_winner( tournament[1] )] )
 end
 
-p rps_tournament_winner( [
-        [
-            [
-                [ ["Armando", "P"], ["Dave", "S"] ],
-                [ ["Richard", "P"], ["Michael", "S"] ]
-            ],
-            [
-                [ ["Andres", "R"], ["Seba", "R"] ],
-                [ ["Tamara", "R"], ["Salome", "R"] ]
-            ]
-        ],
-        [
-            [ ["Allen", "S"], ["Omer", "P"] ],
-            [ ["David E.", "R"], ["Richard X.", "P"] ] 
-        ] 
-        ] )
+#p rps_tournament_winner( [
+#        [
+#            [
+#                [ ["Armando", "P"], ["Dave", "S"] ],
+#                [ ["Richard", "P"], ["Michael", "S"] ]
+#            ],
+#            [
+#                [ ["Andres", "R"], ["Seba", "R"] ],
+#                [ ["Tamara", "R"], ["Salome", "R"] ]
+#            ]
+#        ],
+#        [
+#            [ ["Allen", "S"], ["Omer", "P"] ],
+#            [ ["David E.", "R"], ["Richard X.", "P"] ] 
+#        ] 
+#        ] )
+#
+
+def combine_anagrams(words)
+    anagrams = []
+    partial_array = Array.new
+    words.each { |word|
+        partial_array.push(word)
+        i = words.index(word)+1
+        loop do
+            break if i >= words.length
+            if word.upcase.split(//).sort == words[i].upcase.split(//).sort
+                partial_array.push(words[i])
+                words.delete(words[i])
+            end
+            i += 1
+        end
+        anagrams.push(partial_array)
+        partial_array = []
+    }
+    return anagrams
+end
+
+#p combine_anagrams(["for", "rof", "apple"])
+
+#p combine_anagrams(['cars', 'for', 'potatoes', 'racs', 'four','scar', 'creams', 'scream'])
