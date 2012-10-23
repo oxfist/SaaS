@@ -143,9 +143,9 @@ class Dessert
         @name, @calories = name, calories
     end
 
-    def name ;@name ; end
+    def name ; @name ; end
 
-    def calories ;@calories ; end
+    def calories ; @calories ; end
 
     def name=( name )
         @name = name
@@ -171,9 +171,9 @@ class JellyBean < Dessert
         @name, @calories, @flavor = name, calories, flavor
     end
     
-    def name ;@name ; end
+    def name ; @name ; end
 
-    def calories ;@calories ; end
+    def calories ; @calories ; end
 
     def flavor ; @flavor ; end
 
